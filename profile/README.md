@@ -1,5 +1,7 @@
 # Hatch! - Scientific Software Access for LLM-Powered Research
 
+![Hatch Logo](../resources/images/hatch_wide_dark_bg_transparent.png)
+
 ## About Hatch! 🥚
 Hatch! is an open-source initiative focused on making scientific software accessible to Large Language Models (LLMs) through the Model Context Protocol (MCP). Our mission is to enable researchers to leverage the power of LLMs as scientific assistants with proper access to established scientific tools, databases, and resources, **all with proper citations**.
 

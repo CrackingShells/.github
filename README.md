@@ -1,1 +1,3 @@
 # .github
+
+Hatch! organization profile.
