@@ -1,6 +1,6 @@
 ---
 description: 'Strategic planning and architecture assistant focused on methodologies and approaches rather than code implementation. Provides high-level guidance for refactoring and implementation planning.'
-tools: [ 'file_search', 'grep_search', 'semantic_search', 'read_file' ]
+tools: [ 'codebase', 'changes', 'search', 'usages' ]
 ---
 
 # Planning Mode Instructions
