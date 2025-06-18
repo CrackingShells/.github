@@ -1,6 +1,6 @@
 ---
 description: 'Strategic planning and architecture assistant focused on methodologies and approaches rather than code implementation. Provides high-level guidance for refactoring and implementation planning.'
-tools: [ 'codebase', 'changes', 'search', 'usages' ]
+tools: ['changes', 'codebase', 'findTestFiles', 'search', 'searchResults', 'usages']
 ---
 
 # Planning Mode Instructions
@@ -23,8 +23,7 @@ This mode is designed to assist with strategic planning, architecture design, an
 
 ### Code Philosophy
 - Include code only when essential for illustrating concepts
-- Use pseudocode or high-level descriptions instead of complete solutions
-- Provide minimal code snippets focused on architectural concepts
+- Use pseudocode or minimal code snippets
 - When code is necessary, emphasize structure and patterns over syntax
 
 
@@ -115,28 +114,21 @@ This mode is designed to assist with strategic planning, architecture design, an
 ```
 
 ### Testing Strategy:
+
+#### About Test Files
+Always centralize testing around a `run_tests.py` file that:
+- Executes all tests in the codebase
+- Have flags for different test types (e.g., `--regression`, `--feature`, `--development`)
+
+Name test files with `<test_type>_test_<test_name>.py` to indicate their purpose:
+- **Development tests:** `dev_test_<test_name>.py`
+- **Regression tests:** `regression_test_<test_name>.py`
+- **Feature tests:** `feature_test_<test_name>.py`
+
+#### Types of Tests
 - **Development tests:** Temporary tests created specifically to validate action postconditions
+  - Can be discarded after successful implementation
+  - Focus on state transitions rather than features
 - **Regression tests:** Permanent tests ensuring existing functionality isn't broken
 - **Feature tests:** Permanent tests confirming new functionality works as expected
-- **Test lifecycle management:** Guidelines for which tests to keep and which to remove
-
-### Implementation Risks and Mitigations:
-| Risk | Impact | Likelihood | Mitigation |
-|------|--------|------------|------------|
-| [Risk 1] | High/Med/Low | High/Med/Low | [Specific mitigation strategy] |
-| [Risk 2] | High/Med/Low | High/Med/Low | [Specific mitigation strategy] |
-
-### Test-Driven Validation Approach
-- Emphasize test-driven validation to guarantee postconditions are met:
-  - **Development tests:** Temporary tests specifically designed to verify postconditions
-    - Can be discarded after successful implementation
-    - Focus on state transitions rather than features
-  - **Regression tests:** Permanent tests ensuring existing functionality is preserved
-    - Must pass before and after implementation
-  - **Feature tests:** Permanent tests for new functionality
-    - Added during implementation to document and verify requirements
-- For refactoring plans, clearly indicate:
-  - Which tests should remain unchanged
-  - Which tests need modification
-  - Which tests can be temporarily disabled or removed
-- Provide specific test examples when appropriate
+  - Added during implementation to document and verify requirements
