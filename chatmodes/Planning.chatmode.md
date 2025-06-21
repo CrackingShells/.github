@@ -52,6 +52,7 @@ This mode is designed to assist with strategic planning, architecture design, an
 - For each action, define:
   - **Preconditions:** Required state/conditions before the action can be performed
   - **Details:** Clear explanation of what the action entails
+  - **Context:** Add files, directories, symbols, or other relevant context to clarify the action for an agent to find by themselves in case they have not followed the conversation
   - **Postconditions:** Resulting state/effects on the codebase after action completion
   - **Validation:** Methods to verify postconditions are achieved
 
@@ -71,6 +72,11 @@ This mode is designed to assist with strategic planning, architecture design, an
 1. **Action 1.1:** [Specific actionable step]
    - **Preconditions:** [State/conditions required before this action]
    - **Details:** [Brief explanation of the action]
+   - **Context:** [Files, directories, symbols, or other relevant context]
+     - Files: [List of files involved]
+     - Directories: [List of directories involved]
+     - Symbols: [List of symbols involved]
+     - Other context: [Any additional relevant context]
    - **Postconditions:** [Resulting state/effects after this action]
    - **Validation:**
      - **Development tests:** [Temporary tests that verify postconditions]
@@ -79,6 +85,11 @@ This mode is designed to assist with strategic planning, architecture design, an
 2. **Action 1.2:** [Specific actionable step]
    - **Preconditions:** [State/conditions required before this action]
    - **Details:** [Brief explanation of the action]
+   - **Context:** [Files, directories, symbols, or other relevant context]
+     - Files: [List of files involved]
+     - Directories: [List of directories involved]
+     - Symbols: [List of symbols involved]
+     - Other context: [Any additional relevant context]
    - **Postconditions:** [Resulting state/effects after this action]
    - **Validation:**
      - **Development tests:** [Temporary tests that verify postconditions]
@@ -87,6 +98,11 @@ This mode is designed to assist with strategic planning, architecture design, an
 3. **Action 1.3:** [Specific actionable step]
    - **Preconditions:** [State/conditions required before this action]
    - **Details:** [Brief explanation of the action]
+   - **Context:** [Files, directories, symbols, or other relevant context]
+     - Files: [List of files involved]
+     - Directories: [List of directories involved]
+     - Symbols: [List of symbols involved]
+     - Other context: [Any additional relevant context]
    - **Postconditions:** [Resulting state/effects after this action]
    - **Validation:**
      - **Development tests:** [Temporary tests that verify postconditions]
@@ -104,6 +120,11 @@ This mode is designed to assist with strategic planning, architecture design, an
 1. **Action 2.1:** [Specific actionable step]
    - **Preconditions:** [State/conditions required before this action]
    - **Details:** [Brief explanation of the action]
+   - **Context:** [Files, directories, symbols, or other relevant context]
+     - Files: [List of files involved]
+     - Directories: [List of directories involved]
+     - Symbols: [List of symbols involved]
+     - Other context: [Any additional relevant context]
    - **Postconditions:** [Resulting state/effects after this action]
    - **Validation:**
      - **Development tests:** [Temporary tests that verify postconditions]
