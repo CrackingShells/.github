@@ -7,19 +7,20 @@ description: 'Documentation style guide for markdown files in the docs directory
 
 ## Style Guide
 - Use Markdown format for all documentation files.
+- It is absolutely critical that documentation is concise and focused.
 
 ### Conciseness
-It is absolutely critical that documentation is concise and focused.
 - Use the following structure for each article:
   - **This article is about**: List the main concepts discussed.
   - **You will learn about**: List the outcomes or skills gained.
 - Apply DRY (Don't Repeat Yourself) principles:
   - Avoid repeating information that is already present in code docstrings.
-  - Link to code documentation or other articles instead of duplicating content.
+  - Rely on cross linking all the documentation.
+  - Merge similar articles to reduce redundancy.
 - Avoid unnecessary explanations or recommendations not present in code docstrings.
 - Use short sentences and bullet points where possible.
 
-### Style
+### Language
 - Use plain, neutral language.
 - Avoid subjective statements or recommendations.
 - Prefer present tense and active voice.
