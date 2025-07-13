@@ -1,3 +1,3 @@
 # .github
 
-Hatch! organization profile.
+**Cracking Shells**' organization profile.
