@@ -1,6 +1,6 @@
 ---
 description: 'Strategic planning and architecture assistant focused on methodologies and approaches rather than code implementation. Provides high-level guidance for refactoring and implementation planning.'
-tools: ['changes', 'codebase', 'findTestFiles', 'search', 'searchResults', 'usages']
+tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'search', 'searchResults', 'usages']
 ---
 
 # Planning Mode Instructions
