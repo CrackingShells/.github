@@ -39,16 +39,16 @@ description: 'Documentation style guide for markdown files in the docs directory
 docs/
 ├── articles/
 │   ├── devs/
-│   │   ├── dev_table_of_contents.md
-│   │   ├── <a_single_topic_1>.md
-│   │   ├── contribution_guides/
-│   │   │   ├── <large_contribution_topic_1>/
-│   │   │   │   ├── <part_1>.md
-│   │   │   │   └── <part_2>.md
-│   │   │   └── <a_single_contribution_guide>.md
-│   │   └── <a_single_topic_2>.md
-│   ├── users/
-│   │   ├── user_table_of_contents.md
+│   │   ├── architecture/
+│   │   │   ├── <article_name>.md
+│   │   │   ├── <other_architecture_articles>.md
+│   │   ├── contribution_guidelines/
+│   │   │   ├── <article_name>.md
+│   │   │   ├── <other_contribution_articles>.md
+│   │   ├── ci_cd/
+│   │   │   ├── <article_name>.md
+│   │   │   ├── <other_ci_cd_articles>.md
+│   └── users/
 │   │   ├── GettingStarted.md
 │   │   ├── tutorials/
 │   │   │   ├── Topic1/
@@ -107,13 +107,8 @@ docs/
           - Extensive use of diagrams is encouraged.
 
   - `users`: For API/product consumers.
-    - Place tutorials in a `users/tutorials/` subcategory.
-      - Each tutorial should be a step-by-step guide for users.
-      - The tutorial steps should be split into multiple articles if they are too long.
-        - In that case, group them by topic (e.g., `Topic1/`, `Topic2/`).
-        - In that case, add links at the top and bottom of each article to navigate to the previous and next steps.
-      - Beginner-friendly
-      - Extensive references to the glossery and appendices is encouraged.
+    - For user-facing tutorials and step-by-step walkthroughs, see [the dedicated tutorial guidelines](./tutorials.instructions.md) which contains the detailed conventions (file naming, step structure, exercises, accessibility, and navigation).
+      Keep the `docs/users/tutorials/` area organized by topic and section; link back to the glossary and appendices when needed.
     - Place articles in a `users/` subcategory.
       - Each article should be focused on a specific topic or feature.
       - Use subcategories for related articles (e.g., `RelevantCategoryForTheProduct/`).
@@ -123,11 +118,18 @@ docs/
 A table of contents is required for appendices that will link every article in the appendices folder.
 
 - Place supplementary information that supports the main articles here.
-- Place beginner resources, glossary, and low-level explanations in `docs/article/appendices/`.
+- Place beginner resources, glossary, and low-level explanations in `docs/articles/appendices/`.
 - Use this folder for:
   - Glossary of terms (e.g., "distro", "terminal", etc.) in alphabetical order, separated in sections of first letter.
   - Step-by-step guides for basic tasks (e.g., opening a terminal on Windows/Mac).
   - Any content that would otherwise clutter the main articles.
+
+### Updating and Deprecating Documentation
+- Keep documentation accurate and aligned with the latest released code.
+- Prefer updating existing files in-place rather than creating new files when features change, to preserve inbound links and avoid fragmentation of content.
+- When a behavior or API is removed or intentionally deprecated, mark the relevant section clearly with a short note and an optional migration snippet, but keep the original page available for historical context unless it causes confusion.
+- If a section becomes entirely obsolete, add a short deprecation banner at the top and link to the replacement content; consider archiving the page in an `archive/` folder rather than deleting it.
+- Use the `prompts/update_documentation.prompt.md` workflow to guide automated updates after code changes. The prompt should instruct the agent to edit existing pages in-place where possible, preserve or update links, and add a short changelog entry at the top of any edited file.
 
 ### Resources
 - Store all images, diagrams, and non-markdown assets in `docs/resources/`.
