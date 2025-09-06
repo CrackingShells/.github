@@ -96,6 +96,7 @@ docs/
       - Contribution guidelines.
         - How to contribute (issues, pull requests, etc.).
         - How to run tests, build the project, and deploy.
+        - How to enhance the project (e.g., adding features, improving performance).
       - Code structure and architecture.
         - What directories and/or files are present in the codebase.
         - Design patterns used, where, for what gains.
@@ -140,3 +141,6 @@ A table of contents is required for appendices that will link every article in t
 - Use the `@startuml` and `@enduml` tags to define diagrams.
   - For class diagrams, use web fetch action to get the content of https://plantuml.com/en/class-diagram
   - For sequence diagrams, use web fetch action to get the content of https://plantuml.com/en/sequence-diagram
+  - For component diagrams, use web fetch action to get the content of https://plantuml.com/en/component-diagram
+  - For activity diagrams, use web fetch action to get the content of https://plantuml.com/en/activity-diagram-beta
+  - For use case diagrams, use web fetch action to get the content of https://plantuml.com/en/use-case-diagram
