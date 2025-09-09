@@ -38,6 +38,7 @@ description: 'Documentation style guide for markdown files in the docs directory
 ```
 docs/
 ├── articles/
+│   ├── index.md # Main landing page for articles with links to key sections
 │   ├── devs/
 │   │   ├── architecture/
 │   │   │   ├── <article_name>.md
