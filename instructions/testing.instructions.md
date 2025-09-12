@@ -6,9 +6,10 @@ This standard synthesizes comprehensive analysis findings with proven organizati
 
 **Key Decisions:**
 
+- **Wobble as standard testing framework** for all CrackingShells repositories
 - **Universal hierarchical structure** with industry-standard `test_*.py` naming
 - **Three-tier categorization** (development/regression/integration) with feature test migration
-- **Modern CLI interface** inspired by Hatchling's successful patterns
+- **Modern CLI interface** with file output and enhanced reporting capabilities
 - **Enhanced output formatting** to reduce cognitive overload
 - **Practical flexibility** balanced with clear requirements
 
@@ -126,9 +127,96 @@ def test_local_environment_only(self):
     pass
 ```
 
-## 3. Modern Command-Line Interface
+## 3. Standard Testing Framework
 
-### 3.1 Clean CLI Design
+### 3.1 Wobble as Organizational Standard
+
+**All CrackingShells repositories must use Wobble as the standard testing framework.**
+
+**Installation:**
+```bash
+# Install from repository
+pip install git+https://github.com/CrackingShells/Wobble.git
+
+# For development/editable installation
+git clone https://github.com/CrackingShells/Wobble.git
+cd Wobble
+pip install -e .
+```
+
+**Basic Usage:**
+```bash
+# Run all tests
+wobble
+
+# Run specific categories
+wobble --category regression
+wobble --category integration
+wobble --category development
+
+# File output for CI/CD
+wobble --log-file ci_results.json --log-file-format json
+```
+
+### 3.2 Migration Guidelines
+
+**For Existing Repositories:**
+
+1. **Install Wobble**: Add wobble dependency to `pyproject.toml`
+2. **Update Test Structure**: Migrate to hierarchical structure if needed
+3. **Add Decorators**: Apply required categorization decorators
+4. **Update CI/CD**: Replace existing test runners with wobble commands
+5. **Remove Legacy**: Remove old test runner scripts and configurations
+
+**Migration Example:**
+```bash
+# Before (legacy)
+python -m pytest tests/
+
+# After (wobble standard)
+wobble --category regression --log-file ci_results.json
+```
+
+### 3.3 Wobble Features and Benefits
+
+**Enhanced Test Execution:**
+- Automatic test discovery with hierarchical and decorator support
+- Category-based test filtering and execution
+- Performance tracking with timing information
+- Enhanced error reporting with actionable messages
+
+**File Output Capabilities:**
+- JSON and text format support with auto-detection
+- Configurable verbosity levels (1=Basic, 2=Detailed, 3=Complete)
+- Concurrent file writing without blocking test execution
+- CI/CD integration with structured result files
+
+**Advanced Features:**
+- Cross-platform Unicode symbol support
+- Threaded file I/O for performance
+- Command replay and reconstruction
+- Comprehensive metadata tracking
+
+### 3.4 CI/CD Integration Standards
+
+**Required CI/CD Configuration:**
+```yaml
+# GitHub Actions example
+- name: Run Tests with Wobble
+  run: |
+    wobble --category regression --log-file ci_results.json --log-verbosity 3
+    wobble --category integration --log-file integration_results.json
+```
+
+**File Output Requirements:**
+- All CI/CD pipelines must use `--log-file` for result archiving
+- Use JSON format for programmatic parsing: `--log-file-format json`
+- Include high verbosity for debugging: `--log-verbosity 3`
+- Archive result files as CI/CD artifacts
+
+## 4. Modern Command-Line Interface
+
+### 4.1 Clean CLI Design
 
 **Inspired by Hatchling's successful patterns with modernization:**
 
@@ -157,7 +245,7 @@ python run_tests.py --format json --output results.json
 python run_tests.py --verbose
 ```
 
-### 3.2 Enhanced Discovery Engine
+### 4.2 Enhanced Discovery Engine
 
 **Hierarchical Test Discovery:**
 
@@ -185,7 +273,7 @@ def discover_tests(category=None, scope=None, file=None, test_name=None,
     return suite
 ```
 
-### 3.3 Backward Compatibility
+### 4.3 Backward Compatibility
 
 **No backward compatibility** - clean break for better long-term maintainability:
 
@@ -193,9 +281,9 @@ def discover_tests(category=None, scope=None, file=None, test_name=None,
 - Eliminate flat file naming patterns
 - Focus on single, well-designed interface
 
-## 4. Enhanced Developer Experience
+## 5. Enhanced Developer Experience
 
-### 4.1 Output Formatting
+### 5.1 Output Formatting
 
 **Retain enhanced output formatting** (`test_output_formatter.py`) with these features:
 
@@ -223,7 +311,7 @@ Total Tests: 15   Passed: 14   Failed: 1   Skipped: 0
 Total Duration: 12.45s   Average: 0.83s
 ```
 
-### 4.2 Test Independence Guidelines
+### 5.2 Test Independence Guidelines
 
 **Resource Management (from original guidelines):**
 
@@ -246,7 +334,7 @@ class TestUserAuthentication(unittest.TestCase):
         self.mock_time.stop()
 ```
 
-### 4.3 Mock vs Real Integration Strategy
+### 5.3 Mock vs Real Integration Strategy
 
 **Decision Framework (from original guidelines):**
 
@@ -270,9 +358,9 @@ def test_openai_provider_with_real_api(self):
     # Test actual API integration with real OpenAI service
 ```
 
-## 5. Test Data Management
+## 6. Test Data Management
 
-### 5.1 Structured Test Data
+### 6.1 Structured Test Data
 
 **Directory Structure:**
 
@@ -284,7 +372,7 @@ tests/test_data/
 └── fixtures/         # Database and object fixtures
 ```
 
-### 5.2 Data Access Utilities
+### 6.2 Data Access Utilities
 
 **Standardized helper functions:**
 
@@ -298,9 +386,9 @@ config = load_test_config("test_settings")
 response = load_mock_response("api_success_responses")
 ```
 
-## 6. Maintenance and Quality Standards
+## 7. Maintenance and Quality Standards
 
-### 6.1 Test Maintenance Procedures
+### 7.1 Test Maintenance Procedures
 
 **Development Test Cleanup (from original guidelines):**
 
@@ -314,7 +402,7 @@ response = load_mock_response("api_success_responses")
 - Review flagged tests quarterly for relevance
 - Update or remove outdated tests
 
-### 6.2 Quality Requirements
+### 7.2 Quality Requirements
 
 **Coverage Standards:**
 
@@ -328,7 +416,7 @@ response = load_mock_response("api_success_responses")
 - Integration tests: <10 seconds per test
 - Full CI test suite: <5 minutes execution time
 
-### 6.3 Assertion Best Practices
+### 7.3 Assertion Best Practices
 
 **Descriptive assertions (from original guidelines):**
 
