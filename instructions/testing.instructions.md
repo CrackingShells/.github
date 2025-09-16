@@ -214,7 +214,7 @@ wobble --category regression --log-file ci_results.json
 - Include high verbosity for debugging: `--log-verbosity 3`
 - Archive result files as CI/CD artifacts
 
-## 4. Modern Command-Line Interface
+## 4. Deprecated - Modern Command-Line Interface
 
 ### 4.1 Clean CLI Design
 
@@ -362,7 +362,7 @@ def test_openai_provider_with_real_api(self):
 
 ### 6.1 Structured Test Data
 
-**Directory Structure:**
+**Example Directory Structure:**
 
 ```plaintext
 tests/test_data/
