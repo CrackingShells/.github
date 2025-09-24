@@ -28,6 +28,13 @@ Commit history tells a coherent story of development progress and decision-makin
 [optional footer(s)]
 ```
 
+Leverage scopes of the commit types to facilitate categorization. This is typically useful with automated changelog generation and versioning tools. For example:
+
+- Indicate whether a feature is for CLI, API, or core functionality
+- whether a fix is for a feature in development, the tests, core feature
+- on what the refactoring applies
+- And so on...
+
 ### Types
 
 - **feat**: New features (triggers minor version bump)
@@ -46,16 +53,16 @@ Commit history tells a coherent story of development progress and decision-makin
 # Feature implementation
 feat: add threaded file writer with queue-based operations
 feat(cli): implement file output arguments with validation
-feat: add observer pattern for multi-destination output
+feat(architecture): add observer pattern for multi-destination output
 
 # Bug fixes
 fix: resolve threading deadlock in file writer shutdown
-fix: handle unittest _ErrorHolder objects gracefully
-fix: prevent duplicate output in file logging
+fix(test): handle unittest _ErrorHolder objects gracefully
+fix(feature-dev): prevent duplicate output in file logging
 
 # Documentation
-docs: update CLI reference with file output options
-docs: add architecture overview for threading system
+docs(user-cli): update CLI reference with file output options
+docs(dev-architecture): add architecture overview for threading system
 docs: enhance error message documentation
 
 # Testing
@@ -64,7 +71,7 @@ test: validate unicode symbol cross-platform compatibility
 test: ensure proper resource cleanup in all scenarios
 
 # Refactoring
-refactor: extract observer pattern for output coordination
+refactor(architecture): extract observer pattern for output coordination
 refactor: simplify unicode symbol handling logic
 refactor: remove sys.path.insert statements from test files
 ```
