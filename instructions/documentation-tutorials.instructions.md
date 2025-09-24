@@ -1,5 +1,6 @@
 ---
 applyTo: '**/docs/**/tutorials/*.md'
+description: 'Instructions for creating tutorials in the documentation.'
 ---
 
 # Tutorial Instructions for `docs/users/tutorials/**/*.md`
