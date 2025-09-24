@@ -214,76 +214,9 @@ wobble --category regression --log-file ci_results.json
 - Include high verbosity for debugging: `--log-verbosity 3`
 - Archive result files as CI/CD artifacts
 
-## 4. Deprecated - Modern Command-Line Interface
+## 4. Enhanced Developer Experience
 
-### 4.1 Clean CLI Design
-
-**Inspired by Hatchling's successful patterns with modernization:**
-
-```bash
-# Category-based execution
-python run_tests.py --development
-python run_tests.py --regression  
-python run_tests.py --integration
-
-# Scope filtering for integration tests
-python run_tests.py --integration --scope component
-python run_tests.py --integration --scope service
-python run_tests.py --integration --scope end_to_end
-
-# Tag-based filtering (enhanced from Hatchling)
-python run_tests.py --skip slow,requires_api_key
-python run_tests.py --only regression,integration
-
-# File and test targeting
-python run_tests.py --file test_openai_provider.py
-python run_tests.py --test test_valid_credentials_authenticate_successfully
-
-# Output control
-python run_tests.py --format pretty
-python run_tests.py --format json --output results.json
-python run_tests.py --verbose
-```
-
-### 4.2 Enhanced Discovery Engine
-
-**Hierarchical Test Discovery:**
-
-```python
-def discover_tests(category=None, scope=None, file=None, test_name=None, 
-                  skip_tags=None, only_tags=None):
-    """Enhanced test discovery supporting hierarchical structure."""
-    
-    if file:
-        return discover_specific_file(file, test_name)
-    
-    search_dirs = []
-    if category:
-        search_dirs = [tests_dir / category]
-    else:
-        search_dirs = [tests_dir / cat for cat in ['development', 'regression', 'integration']]
-    
-    suite = unittest.TestSuite()
-    for search_dir in search_dirs:
-        if search_dir.exists():
-            discovered = loader.discover(str(search_dir), pattern='test_*.py')
-            filtered = apply_tag_filters(discovered, skip_tags, only_tags, scope)
-            suite.addTests(filtered)
-    
-    return suite
-```
-
-### 4.3 Backward Compatibility
-
-**No backward compatibility** - clean break for better long-term maintainability:
-
-- Remove support for old flag names (`--feature`, `--skip-slow`)
-- Eliminate flat file naming patterns
-- Focus on single, well-designed interface
-
-## 5. Enhanced Developer Experience
-
-### 5.1 Output Formatting
+### 4.1 Output Formatting
 
 **Retain enhanced output formatting** (`test_output_formatter.py`) with these features:
 
@@ -311,7 +244,7 @@ Total Tests: 15   Passed: 14   Failed: 1   Skipped: 0
 Total Duration: 12.45s   Average: 0.83s
 ```
 
-### 5.2 Test Independence Guidelines
+### 4.2 Test Independence Guidelines
 
 **Resource Management (from original guidelines):**
 
@@ -334,7 +267,7 @@ class TestUserAuthentication(unittest.TestCase):
         self.mock_time.stop()
 ```
 
-### 5.3 Mock vs Real Integration Strategy
+### 4.3 Mock vs Real Integration Strategy
 
 **Decision Framework (from original guidelines):**
 
