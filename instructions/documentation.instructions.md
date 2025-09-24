@@ -1,147 +1,119 @@
 ---
 applyTo: 'docs/**/*.md'
-description: 'Documentation style guide for markdown files in the docs directory.'
+description: 'Master documentation guidelines with references to specialized instruction files.'
 ---
 
-# Documentation Instructions for `docs/**/*.md`
+# Documentation Instructions Overview
 
-## Style Guide
-- Use Markdown format for all documentation files.
-- It is absolutely critical that documentation is focused.
+## Philosophy
+Documentation is the readable front-end description of the project. It must be pleasant to read, focused, and technically accurate. All documentation must follow organization standards for consistency and maintainability.
 
-### Tone
+## Documentation Standards System
 
-- Maintain focused professionalism and technical clarity throughout.
-- Use warmth or engagement only at crucial junctions (e.g., transitions, summaries, or onboarding moments), not as a default.
-- Be humble and educational.
+This documentation system is organized into specialized instruction files that cover different aspects of documentation creation and maintenance:
 
-### Compelling Conciseness
-- Documentation is the readable front-end description of the project. It must be pleasant to read to keep users hooked and focused. There is a sweet spot between dryness of technical writing and engaging writing.
--  Use precise paragraphs that tell the reader exactly what they need to know about topics.
-- Apply DRY (Don't Repeat Yourself) principles:
-  - Avoid repeating information.
-  - Rely on cross linking all the documentation.
-  - Merge similar articles to reduce redundancy.
-- Avoid explanations or recommendations that do not stem from the project.
+### 📝 [Style Guide](./documentation-style-guide.instructions.md)
+**Applies to**: `docs/**/*.md`
+- Writing tone, language, and audience guidelines
+- Content organization and cross-referencing standards
+- Quality assurance and maintenance procedures
 
-### Language
-- Use plain, neutral language.
-- Avoid subjective statements or recommendations.
-- Prefer present tense and active voice.
+### 🏗️ [Structure Standards](./documentation-structure.instructions.md) 
+**Applies to**: `docs/**/*`
+- Directory organization and file naming conventions
+- Navigation patterns and content categorization
+- User/developer/API content separation
 
-### Audience
-- Main articles are for all users, but assume some technical background.
-- Direct beginners to appendices for foundational concepts.
+### ⚙️ [MkDocs Setup](./documentation-mkdocs-setup.instructions.md)
+**Applies to**: `mkdocs.yml`, `.readthedocs.yaml`, `docs/requirements.txt`, `pyproject.toml`
+- Complete MkDocs configuration templates
+- ReadTheDocs integration and build environment
+- Local development workflow and troubleshooting
 
-## Structure
+### 🔧 [API Documentation](./documentation-api.instructions.md)
+**Applies to**: `docs/articles/api/**/*.md`, `**/*.py`
+- Automated API documentation generation using mkdocstrings
+- Google-style docstring requirements and examples
+- Module organization and navigation integration
 
-```
-docs/
-├── articles/
-│   ├── index.md # Main landing page for articles with links to key sections
-│   ├── devs/
-│   │   ├── architecture/
-│   │   │   ├── <article_name>.md
-│   │   │   ├── <other_architecture_articles>.md
-│   │   ├── contribution_guidelines/
-│   │   │   ├── <article_name>.md
-│   │   │   ├── <other_contribution_articles>.md
-│   │   ├── ci_cd/
-│   │   │   ├── <article_name>.md
-│   │   │   ├── <other_ci_cd_articles>.md
-│   └── users/
-│   │   ├── GettingStarted.md
-│   │   ├── tutorials/
-│   │   │   ├── Topic1/
-│   │   │   │   ├── <tutorial_step1>.md
-│   │   │   │   └── <tutorial_step2>.md
-│   │   │   └── Topic2/
-│   │   │       └── <tutorial_a_unique_file_if_short>.md
-│   │   ├── <article_name>.md
-│   │   ├── <other_user_articles>.md
-│   │   ├── Feature1/
-│   │   │   ├── <article_name1>.md
-│   │   │   └── <article_name2>.md
-│   │   └── Feature2/
-│   │       └── <article_name>.md
-│   └── appendices/
-│       ├── glossary.md
-│       └── <other_appendix_articles>.md
-└── resources/
-    ├── diagrams/
-    │   └── <diagram_name>.puml
-    └── images/
-        ├── <image_name>.png
-        └── <other_resources>.jpg
-```
+### 🎨 [Resources Management](./documentation-resources.instructions.md)
+**Applies to**: `docs/resources/**/*`
+- PlantUML diagram standards and examples
+- Image management and organization guidelines
+- Asset optimization and accessibility standards
 
-### Articles
+## Quick Start Guide
 
-#### General Guidelines
+### For New Repositories
+1. **Set up MkDocs**: Follow [MkDocs Setup Instructions](./documentation-mkdocs-setup.instructions.md)
+2. **Create directory structure**: Use [Structure Standards](./documentation-structure.instructions.md)
+3. **Write initial content**: Apply [Style Guide](./documentation-style-guide.instructions.md)
+4. **Add API documentation**: Follow [API Documentation](./documentation-api.instructions.md)
+5. **Include resources**: Use [Resources Management](./documentation-resources.instructions.md)
 
-- Introduce technical articles with the content it covers:
-  """
-  This article is about:
-  - <short list of concepts discussed>
-  """
-- Each article should focus on a single topic or feature.
-- Use headings for logical organization.
-- Use code snippets to illustrate points or provide examples.
-- Reference resources (images, diagrams) to support text.
-- Do not repeat information from code docstrings—link or refer to code as needed.
+### For Existing Repositories
+1. **Review current documentation** against specialized guidelines
+2. **Plan migration** following structure and setup standards
+3. **Implement MkDocs** configuration using provided templates
+4. **Migrate content** preserving URLs and cross-references
+5. **Add automated API documentation** for improved maintenance
 
-#### Details
+### For Content Updates
+1. **Identify the relevant specialized guideline** for your changes
+2. **Follow the specific standards** for that content type
+3. **Test locally** using MkDocs development workflow
+4. **Maintain cross-references** and navigation consistency
 
-- Divide articles into two main categories:
-  - `devs`: For maintainers and code contributors.
-      - Contribution guidelines.
-        - How to contribute (issues, pull requests, etc.).
-        - How to run tests, build the project, and deploy.
-        - How to enhance the project (e.g., adding features, improving performance).
-      - Code structure and architecture.
-        - What directories and/or files are present in the codebase.
-        - Design patterns used, where, for what gains.
-          - Extensive use of diagrams is encouraged.
-      - CI and CD processes.
-        - How the CI/CD is set up.
-        - What tools are used (e.g., GitHub Actions)
-        - Description of the CI/CD pipeline.
-          - Extensive use of diagrams is encouraged.
+## Core Principles
 
-  - `users`: For API/product consumers.
-    - For user-facing tutorials and step-by-step walkthroughs, see [the dedicated tutorial guidelines](./tutorials.instructions.md) which contains the detailed conventions (file naming, step structure, exercises, accessibility, and navigation).
-      Keep the `docs/users/tutorials/` area organized by topic and section; link back to the glossary and appendices when needed.
-    - Place articles in a `users/` subcategory.
-      - Each article should be focused on a specific topic or feature.
-      - Use subcategories for related articles (e.g., `RelevantCategoryForTheProduct/`).
-      - Use subcategories for different products (e.g., `AnotherCategoryForTheProduct/`).
+### Universal Standards
+- **Markdown format** for all documentation files
+- **Focused content** that tells readers exactly what they need to know
+- **DRY principles** with cross-linking instead of repetition
+- **Technical accuracy** aligned with latest code
+- **Professional tone** with warmth only at crucial junctions
 
-### Appendices
-A table of contents is required for appendices that will link every article in the appendices folder.
+### Organization Requirements
+- **Consistent structure** across all repositories
+- **Clear separation** between user, developer, and API content
+- **Logical navigation** that matches user mental models
+- **Automated generation** where possible to reduce maintenance
 
-- Place supplementary information that supports the main articles here.
-- Place beginner resources, glossary, and low-level explanations in `docs/articles/appendices/`.
-- Use this folder for:
-  - Glossary of terms (e.g., "distro", "terminal", etc.) in alphabetical order, separated in sections of first letter.
-  - Step-by-step guides for basic tasks (e.g., opening a terminal on Windows/Mac).
-  - Any content that would otherwise clutter the main articles.
+### Quality Assurance
+- **Local testing** required before committing changes
+- **Cross-reference validation** to ensure link integrity
+- **Accessibility standards** for all visual content
+- **Regular maintenance** to keep content current
 
-### Updating and Deprecating Documentation
-- Keep documentation accurate and aligned with the latest released code.
-- Prefer updating existing files in-place rather than creating new files when features change, to preserve inbound links and avoid fragmentation of content.
-- When a behavior or API is removed or intentionally deprecated, mark the relevant section clearly with a short note and an optional migration snippet, but keep the original page available for historical context unless it causes confusion.
-- If a section becomes entirely obsolete, add a short deprecation banner at the top and link to the replacement content; consider archiving the page in an `archive/` folder rather than deleting it.
-- Use the `prompts/update_documentation.prompt.md` workflow to guide automated updates after code changes. The prompt should instruct the agent to edit existing pages in-place where possible, preserve or update links, and add a short changelog entry at the top of any edited file.
+## Implementation Status
 
-### Resources
-- Store all images, diagrams, and non-markdown assets in `docs/resources/`.
-- Reference resources in articles and appendices using relative paths.
+### Established Repositories
+- **Hatch**: ✅ Full MkDocs implementation with API documentation
+- **Hatchling**: 🔄 Migration needed from Jekyll to MkDocs standards
 
-#### About diagrams
-- Write plantuml diagrams in `docs/resources/diagrams/`.
-- Use the `@startuml` and `@enduml` tags to define diagrams.
-  - For class diagrams, use web fetch action to get the content of https://plantuml.com/en/class-diagram
-  - For sequence diagrams, use web fetch action to get the content of https://plantuml.com/en/sequence-diagram
-  - For component diagrams, use web fetch action to get the content of https://plantuml.com/en/component-diagram
-  - For activity diagrams, use web fetch action to get the content of https://plantuml.com/en/activity-diagram-beta
-  - For use case diagrams, use web fetch action to get the content of https://plantuml.com/en/use-case-diagram
+### Template Resources
+All specialized instruction files include:
+- Complete configuration templates
+- Working examples from established implementations
+- Step-by-step setup procedures
+- Troubleshooting guides and best practices
+
+## Support and Resources
+
+### Getting Help
+- **Configuration issues**: See [MkDocs Setup](./documentation-mkdocs-setup.instructions.md) troubleshooting
+- **Content organization**: Reference [Structure Standards](./documentation-structure.instructions.md)
+- **Writing questions**: Follow [Style Guide](./documentation-style-guide.instructions.md)
+- **Technical problems**: Check individual instruction files for specific guidance
+
+### Contributing to Documentation Standards
+- Propose changes through standard pull request process
+- Test changes against existing implementations
+- Update all affected specialized instruction files
+- Maintain backward compatibility during transitions
+
+---
+
+**System Status**: ✅ Comprehensive specialized guidelines available  
+**Last Updated**: September 24, 2025  
+**Coverage**: Style, Structure, MkDocs, API, Resources
