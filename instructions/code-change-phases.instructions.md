@@ -34,6 +34,14 @@ Based on direct implementation experience, this workflow pattern consistently de
    - Architecture adjustment based on implementation discoveries
    - Continuous validation against original objectives
 
+6. **Analysis Accuracy Verification**
+   - **File References**: Confirm all referenced file paths exist and are spelled correctly
+   - **Line Numbers**: Validate line number references against current file state (not historical commits)
+   - **Code Snippets**: Verify code snippets match actual implementation (copy-paste from files, don't paraphrase)
+   - **Configuration Values**: Read configuration files directly rather than inferring from commit messages
+   - **Dependencies**: Check actual dependency versions in package files (pyproject.toml, requirements.txt, etc.)
+   - **Context Timestamp**: Document when analysis was performed (commit SHA or date) for future reference
+
 ### Deliverables
 
 Versioned reports on relevant topics following [org's guidelines](./report-creation-rule.md)
