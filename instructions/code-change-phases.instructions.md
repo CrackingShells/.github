@@ -44,7 +44,7 @@ Based on direct implementation experience, this workflow pattern consistently de
 
 ### Deliverables
 
-Versioned reports on relevant topics following [org's guidelines](./report-creation-rule.md)
+Versioned reports on relevant topics following [org's reporting guidelines](./reporting.instructions.md)
 
 ## Phase 2: Comprehensive Test Suite Development
 
@@ -75,7 +75,7 @@ Versioned reports on relevant topics following [org's guidelines](./report-creat
 
 ### Deliverables
 
-A series of versioned test definition reports for every iteration following [org's guidelines](./report-creation-rule.md) and [adequate report type](./report-types.md#test-definition-report)
+A series of versioned test definition reports for every iteration following [org's reporting guidelines](./reporting.instructions.md)
 
 ## Phase 3: Core Feature Implementation
 
@@ -116,7 +116,7 @@ A series of versioned test definition reports for every iteration following [org
 
 ### Deliverables
 
-A series of versioned test execution and validation reports for every iteration following [org's guidelines](./report-creation-rule.md) and [adequate report type](./report-types.md#test-execution-and-validation-report)
+A series of versioned test execution and validation reports for every iteration following [org's reporting guidelines](./reporting.instructions.md)
 
 ## Phase 5: Focused, Logical Git Commits
 
@@ -156,7 +156,7 @@ Refer to [Git Workflow Instructions](./git-workflow.md) for detailed commit mess
 
 ### Deliverables
 
-Versioned modification reports following [org's guidelines](./report-creation-rule.md) and adequate report type for [documentation updates](./report-types.md#documentation-update-report) and [knowledge transfer](./report-types.md#knowledge-transfer-report)
+Versioned modification reports following [org's reporting guidelines](./reporting.instructions.md)
 
 ## Phase 7: Documentation Commits Separate from Code Changes
 
