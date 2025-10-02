@@ -127,6 +127,28 @@ def test_local_environment_only(self):
     pass
 ```
 
+### 2.3 Test Necessity Evaluation Criteria
+
+**Before writing each test, ask**:
+1. **Ownership**: Does this test our implementation or standard library/framework behavior?
+2. **Uniqueness**: Does this test add unique value not covered by other tests?
+3. **Consolidation**: Can this be combined with another test without losing coverage?
+4. **Critical Path**: Is this testing a critical path for our feature?
+
+**Remove tests that**:
+- Validate standard library behavior (trust Python stdlib: argparse, unittest, json, pathlib, etc.)
+- Validate well-established framework behavior (trust Flask, Django, FastAPI, pytest, etc.)
+- Duplicate coverage of other tests without adding new insights
+- Test implementation details rather than observable behavior
+- Add complexity without proportional value
+
+**Trust Standard Libraries and Frameworks**: Python's standard library and well-established frameworks are thoroughly tested by their maintainers. Focus your tests on the logic you own and the integration points between your code and these dependencies.
+
+**Example Principle**:
+- ❌ AVOID: Testing that a framework's built-in feature works as documented
+- ✅ GOOD: Testing that your code correctly uses the framework's feature
+- ✅ GOOD: Testing your custom logic, error handling, and business rules
+
 ## 3. Standard Testing Framework
 
 ### 3.1 Wobble as Organizational Standard
@@ -157,6 +179,37 @@ wobble --category development
 # File output for CI/CD
 wobble --log-file ci_results.json --log-file-format json
 ```
+
+#### Essential Wobble Flags for Development
+
+**File Output for Stakeholder Review** (recommended for all development work):
+```bash
+wobble --log-file test_execution_v0.txt --log-verbosity 3
+```
+
+**Key Flags**:
+- `--log-file <filename>`: Save test results to file (auto-detects format from extension: .txt or .json)
+- `--log-verbosity <level>`: Output detail level
+  - Level 1: Minimal (CI/CD pipelines)
+  - Level 2: Balanced (local development)
+  - Level 3: Complete (stakeholder review, debugging)
+- `--pattern <glob>`: Select specific test files (e.g., `test_cli_*.py`)
+
+**Version Log Files** to track debugging iterations:
+```bash
+# Initial run
+wobble --log-file test_execution_v0.txt --log-verbosity 3
+
+# After fixes
+wobble --log-file test_execution_v1.txt --log-verbosity 3
+```
+
+**Discover More Options**:
+```bash
+wobble --help
+```
+
+Use `--help` to explore additional flags for category filtering, output formats, and advanced features.
 
 ### 3.2 Migration Guidelines
 
@@ -285,11 +338,57 @@ def test_api_client_handles_timeout(self):
         mock_post.side_effect = requests.Timeout()
         # Test timeout handling logic
 
-# Integration test - use real implementations  
+# Integration test - use real implementations
 @integration_test(scope="service")
 def test_openai_provider_with_real_api(self):
     # Test actual API integration with real OpenAI service
 ```
+
+### 4.4 Mock Patching Best Practices
+
+**Critical Rule**: Always patch where a function is **used**, not where it's **defined**.
+
+#### Import Style Determines Patch Target
+
+**For `from X import Y` imports**:
+```python
+# In module.py
+from some_library import some_function
+
+def my_function():
+    return some_function()
+
+# In test file - patch at point of use
+with patch('module.some_function', return_value='mocked'):
+    result = my_function()  # Returns 'mocked'
+```
+
+**For `import X` imports**:
+```python
+# In module.py
+import some_library
+
+def my_function():
+    return some_library.some_function()
+
+# In test file - patch at definition
+with patch('some_library.some_function', return_value='mocked'):
+    result = my_function()  # Returns 'mocked'
+```
+
+#### Why This Matters
+
+When Python executes `from X import Y`, it creates a **local reference** to `Y` in the importing module's namespace. Patching `X.Y` after import doesn't affect this local reference. You must patch the reference where it's actually used.
+
+**This pattern applies universally** to any Python module, function, class, or constant being mocked, not just the specific libraries shown in examples.
+
+#### Debugging Mock Issues
+
+If your mock isn't being applied:
+1. Check the import style in the module being tested
+2. Verify you're patching `module_using_it.function` not `original_module.function`
+3. Use `print()` statements to confirm which code path is executing
+4. Consider using `patch.object()` for more explicit control
 
 ## 6. Test Data Management
 
