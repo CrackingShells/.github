@@ -28,6 +28,7 @@ Based on direct implementation experience, this workflow pattern consistently de
    - Proposal of architectural enhancements and optimizations
    - Documentation of design decisions and rationale
    - Creation of implementation roadmap with clear milestones
+   - **For complex projects**: Consider creating a formal roadmap following [roadmap generation guidelines](./roadmap-generation.instructions.md)
 
 5. **Iterative Refinement**
    - Stakeholder feedback integration and requirement clarification

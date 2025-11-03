@@ -16,42 +16,71 @@ This document provides comprehensive guidance for creating, organizing, and iter
 
 Unless explicitly specified otherwise, save all reports to:
 ```
-<workspace_root>/Laghari/<coding_agent_software>/<project_name>/<topic>/<sub_topic>/<descriptive_filename>_v<version>.md
+<workspace_root>/__reports__/<topic>/<descriptive_filename>_v<version>.md
 ```
 
 ### Path Components Explained
 
 - **`<workspace_root>`**: The root directory of the current repository/workspace
-- **`<coding_agent_software>`**: The coding agent used (e.g., Augment, VS Code, Zed, Cursor)
-- **`<project_name>`**: Repository name (e.g., Wobble, Hatch, Hatchling)
-- **`<topic>`**: Clear, descriptive folder name related to the report's subject matter (e.g., feature_XXX, research_XXX, refactor_XXX)
-- **`<sub_topic>`**: Optional subdirectory for further organization (e.g., fix_AAA, refactor_BBB, document_CCC)
+- **`<topic>`**: Clear, descriptive folder name related to the report's subject matter (e.g., feature_version_command, bug_fix_memory_leak, refactor_api_layer, analysis_performance)
 - **`<descriptive_filename>.md`**: Meaningful filename that clearly indicates the report's content
 
 ### Directory Creation Rules
 
-- **Auto-create missing directories**: Create the relevant report's project, topic, or sub-topic directory if they don't exist
+- **Auto-create missing directories**: Create the relevant topic directory if it doesn't exist
 - **Session organization**: Keep all files from a single work session within the same topic directory for clarity
-- **Naming conventions**: 
+- **Naming conventions**:
   - Use snake_case for directory and file names
   - Avoid spaces and special characters
   - Make names descriptive and self-explanatory
+  - Prefix topic names with type for clarity (e.g., `feature_`, `bug_fix_`, `refactor_`, `analysis_`)
 
 ### Example Structure
 
 ```
 project_root/
-└── Laghari/                          # Implementation records
-    └── Augment/                      # Coding agent software
-        └── Hatch/                    # Project name
-            └── version_command/      # Topic
-                ├── README.md         # Directory overview
-                ├── 00-analysis_v0.md
-                ├── 00-analysis_v1.md
-                ├── 01-test_definition_v0.md
-                ├── 01-test_definition_v1.md
-                └── 02-implementation_summary_v0.md
+├── __reports__/                              # Temporary reports (periodic cleanup)
+│   ├── feature_version_command/              # Topic
+│   │   ├── README.md                         # Directory overview
+│   │   ├── 00-analysis_v0.md
+│   │   ├── 00-analysis_v1.md
+│   │   ├── 01-test_definition_v0.md
+│   │   ├── 01-test_definition_v1.md
+│   │   └── 02-implementation_summary_v0.md
+│   ├── bug_fix_memory_leak/                  # Topic
+│   │   ├── 00-debugging_report_v0.md
+│   │   └── 01-fix_summary_v0.md
+│   └── refactor_api_layer/                   # Topic
+│       ├── 00-analysis_v0.md
+│       └── 01-implementation_v0.md
+└── __design__/                               # Long-term design documents (permanent)
+    ├── architecture_overview.md
+    ├── roadmap_v1.md
+    └── api_design_decisions.md
 ```
+
+### Report vs Design Document Distinction
+
+**`__reports__/`** - Temporary documentation:
+- Implementation reports (analysis, test definitions, execution results)
+- Debugging reports
+- Knowledge transfer reports
+- Work-in-progress documentation
+- **Lifecycle**: Periodic cleanup (archive or delete after project completion)
+- **Purpose**: Track development progress and decisions during active work
+
+**`__design__/`** - Permanent documentation:
+- Architecture documents
+- Product roadmaps
+- Design decisions and rationale
+- API specifications
+- System design documents
+- **Lifecycle**: Maintained long-term as reference
+- **Purpose**: Long-term reference for understanding system design and strategic decisions
+
+**When to use which**:
+- Use `__reports__/` for: Work-in-progress documentation, iteration tracking, temporary analysis, implementation records
+- Use `__design__/` for: Finalized architecture, stable roadmaps, design decisions that affect long-term maintenance, strategic planning documents
 
 ---
 

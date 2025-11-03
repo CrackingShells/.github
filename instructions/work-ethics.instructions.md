@@ -29,6 +29,7 @@ Refer to [Git Workflow Instructions](./git-workflow.md) for detailed commit mess
 - **Agent Optimization**: Methodical approaches create reusable debugging patterns
 - **Evidence**: Threading deadlock resolution through 5 iterations of queue balance analysis
 - **Recommendation**: Document debugging steps to build organizational debugging knowledge
+- **Workflow**: Use dedicated debugging branches for thorough investigation - see [debugging workflow in git-workflow.md](./git-workflow.md#special-case-debugging-workflow)
 
 ## 4. Research-First Approach and Evidence-Based Validation
 

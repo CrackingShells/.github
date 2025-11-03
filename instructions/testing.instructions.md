@@ -127,7 +127,85 @@ def test_local_environment_only(self):
     pass
 ```
 
-### 2.3 Test Necessity Evaluation Criteria
+### 2.3 What NOT to Test
+
+**Principle**: Test your implementation, not existing functionality or standard library behavior.
+
+**Do NOT test**:
+
+- ❌ **Standard library behavior** (trust Python stdlib)
+  - Example: Testing that `shlex.split()` correctly parses quoted strings
+  - Instead: ✅ Test that your code correctly uses `shlex.split()` for argument parsing
+
+- ❌ **Framework behavior** (trust Pydantic, pytest, Wobble, etc.)
+  - Example: Testing that Pydantic validates required fields
+  - Instead: ✅ Test that your Pydantic model has the correct field definitions
+
+- ❌ **Existing functionality** (only test changes)
+  - Example: Testing that existing `get_config()` works when you're adding `set_config()`
+  - Instead: ✅ Test that `set_config()` correctly updates configuration
+
+- ❌ **Third-party library behavior**
+  - Example: Testing that `requests.get()` makes HTTP requests
+  - Instead: ✅ Test that your code handles `requests.get()` responses correctly
+
+**Concrete Examples**:
+
+| ❌ Bad Test (Testing Existing Functionality) | ✅ Good Test (Testing Your Implementation) |
+|----------------------------------------------|---------------------------------------------|
+| Test that `json.dumps()` serializes dicts | Test that your `export_config()` uses `json.dumps()` correctly |
+| Test that Pydantic validates types | Test that your model has correct field types and validators |
+| Test that pytest fixtures work | Test that your code uses fixtures correctly |
+| Test that `os.path.exists()` checks files | Test that your code handles missing files gracefully |
+
+**Impact**: Following this principle typically reduces initial test definitions by 30-50% while maintaining the same effective coverage.
+
+### 2.4 Test Definition Self-Review Checklist
+
+Before submitting test definitions, apply this checklist to each test:
+
+- [ ] **Implementation Focus**: Can I clearly state what code change I'm testing?
+- [ ] **Scope Clarity**: Is this testing our implementation or existing functionality?
+- [ ] **Failure Criterion**: Would this test fail if I removed the feature code?
+- [ ] **Uniqueness**: Is there an existing test that already covers this scenario?
+- [ ] **Trust Boundaries**: Am I testing standard library/framework behavior (which we should trust)?
+- [ ] **Consolidation**: Can this test be consolidated with another test without losing coverage?
+- [ ] **Value Addition**: Does this test add unique value to the test suite?
+
+**Expected Impact**: Reduce unnecessary tests in initial definitions by 30-40%.
+
+### 2.5 Test Organization and Grouping
+
+**Functional Grouping** (recommended for test documentation):
+
+Instead of arbitrary letter-based categories (A, B, C), use functional grouping that describes what is being tested:
+
+```markdown
+## Core Functionality Tests
+- Server existence detection
+- Partial update validation
+- Configuration merging
+
+## Field Handling Tests
+- Field preservation during updates
+- Command/URL switching behavior
+- Header management
+
+## Integration & Regression Tests
+- End-to-end workflows
+- Backward compatibility
+- Error handling
+```
+
+**Benefits**:
+- Clearer purpose for each group
+- Easier to understand test coverage
+- Simpler naming (no confusing letter schemes)
+- Better organization without over-categorization
+
+**Guideline**: Use 3-4 functional groups maximum for clarity.
+
+### 2.6 Test Necessity Evaluation Criteria
 
 **Before writing each test, ask**:
 1. **Ownership**: Does this test our implementation or standard library/framework behavior?
@@ -454,12 +532,53 @@ response = load_mock_response("api_success_responses")
 
 ```python
 # Good - descriptive assertion messages
-self.assertEqual(result.status, "authenticated", 
+self.assertEqual(result.status, "authenticated",
                 f"Authentication failed: expected 'authenticated', got '{result.status}'")
 
 # Good - assert both state and side effects
 self.assertTrue(user.is_authenticated)
 self.assertIn("login_success", captured_events)
 ```
+
+### 7.4 Test-to-Code Ratio Guidelines
+
+**Target Ratios** (tests : code changes):
+
+- **Bug Fixes**: 2:1 to 3:1
+  - Focus on regression test for the bug
+  - Validation that existing functionality remains intact
+  - Example: 6 bug fixes → Target: 12-18 tests
+
+- **New Features**: 4:1 to 6:1
+  - Comprehensive coverage of new functionality
+  - Edge cases and error handling
+  - Integration with existing code
+  - Example: 1 medium complexity feature → Target: 8-12 tests
+
+- **Refactoring**: 1:1 to 2:1
+  - Verify behavior preservation
+  - Minimal new tests (refactoring shouldn't change behavior)
+  - Example: 1 refactoring → Target: 2-4 tests (if any new tests needed)
+
+**Example Analysis**:
+- 6 issues (bug fixes) → Target: 12-18 tests
+- 1 feature (medium complexity) → Target: 8-12 tests
+- 1 refactoring → Target: 2-4 tests (if any new tests needed)
+- **Total**: 22-34 tests for this scope
+
+**Red Flags**:
+- 23 tests for 6 bug fixes (3.8:1) → Likely over-testing
+- 5 tests for complex feature → Likely under-testing
+- 15 tests for simple refactoring → Likely testing existing functionality
+
+**Note**: These are guidelines, not strict rules. Adjust based on:
+- Complexity of the change
+- Risk level (critical vs non-critical paths)
+- Existing test coverage
+- Integration complexity
+
+**Application**: Use these ratios during test definition review to validate test scope appropriateness.
+
+---
 
 This standard provides a practical, modern testing architecture that solves real pain points while preserving proven organizational practices and maintaining focus on developer productivity.

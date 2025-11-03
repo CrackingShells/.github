@@ -149,6 +149,178 @@ docs/architecture-overview
 - Keep branches focused on single features
 - Regular rebase to maintain clean history
 
+### Special Case: Debugging Workflow
+
+When debugging issues, use a dedicated debugging branch to encourage frequent commits without polluting the main development history.
+
+**Workflow**:
+
+1. **Create debugging branch from current location**:
+   ```bash
+   git checkout -b debugging/<issue-description>
+   # Example: debugging/memory-leak-in-profiler
+   ```
+
+2. **Commit frequently during debugging**:
+   - Commit every hypothesis test
+   - Commit every diagnostic change
+   - Commit every attempted fix
+   - Use descriptive messages: `debug: test hypothesis X`, `debug: add logging for Y`
+
+3. **When bug is fixed**:
+
+   **Option A: Clean commit on original branch** (recommended for simple fixes)
+   ```bash
+   # Identify the fix
+   git log  # Review debugging commits to understand the fix
+
+   # Switch back to original branch
+   git checkout <original-branch>
+
+   # Make ONE clean commit with the fix
+   git add <fixed-files>
+   git commit -m "fix: resolve memory leak in profiler shutdown
+
+   Root cause: ThreadedFileWriter not properly joining threads
+   Solution: Add explicit thread.join() with timeout in shutdown()
+
+   Fixes #123"
+   ```
+
+   **Option B: Sequence of clean commits** (for complex fixes)
+   ```bash
+   # Switch back to original branch
+   git checkout <original-branch>
+
+   # Make a sequence of logical commits
+   git commit -m "refactor: extract thread cleanup logic"
+   git commit -m "fix: add thread join with timeout"
+   git commit -m "test: add thread cleanup validation"
+   ```
+
+4. **Delete debugging branch**:
+   ```bash
+   git branch -D debugging/<issue-description>
+   ```
+
+**Benefits**:
+- Encourages thorough debugging with frequent commits
+- Preserves debugging history for learning (before deletion)
+- Keeps main development history clean and logical
+- Facilitates root cause analysis documentation
+
+**Debugging Commit Format**:
+```plaintext
+debug: <what you're testing/trying>
+
+# Examples:
+debug: test hypothesis that memory leak is in file writer
+debug: add logging to track thread lifecycle
+debug: try alternative shutdown sequence
+```
+
+**Final Fix Commit Format**:
+```plaintext
+fix: <what was fixed>
+
+Root cause: <why the bug occurred>
+Solution: <how it was fixed>
+
+Fixes #<issue-number>
+```
+
+**Cross-Reference**: See `work-ethics.instructions.md` for root cause analysis guidelines.
+
+### Milestone-Based Development Workflow
+
+For projects with formal roadmaps and milestone tracking, use hierarchical branching to organize work by phases, milestones, and tasks.
+
+**Branch Hierarchy**:
+
+```plaintext
+main (production releases only)
+  └── dev (development integration branch)
+      ├── milestone/1.1-short-description
+      │   ├── task/1.1.1-short-description
+      │   ├── task/1.1.2-short-description
+      │   └── task/1.1.3-short-description
+      ├── milestone/1.2-short-description
+      │   └── task/1.2.1-short-description
+      └── milestone/2.1-short-description
+          └── task/2.1.1-short-description
+```
+
+**Workflow Rules**:
+
+1. **All work from `dev` branch** (not `main`)
+   - `main` is production-only, receives merges only at major releases
+   - `dev` is the integration branch for all development work
+
+2. **Milestone branches from `dev`**
+   - Branch naming: `milestone/<milestone-id>-<short-description>`
+   - Example: `milestone/2.1-thread-safe-architecture`
+   - Created when milestone work begins
+   - Deleted after merge back to `dev`
+
+3. **Task branches from milestone branches**
+   - Branch naming: `task/<task-id>-<short-description>`
+   - Example: `task/2.1.1-design-architecture`
+   - Created when task work begins
+   - Deleted after merge back to milestone branch
+
+4. **Merge Hierarchy**:
+   - Task branches → Milestone branch (when task complete)
+   - Milestone branch → `dev` (when ALL milestone tasks complete)
+   - `dev` → `main` (when ready for production release)
+
+5. **Merge Criteria**:
+   - **Task → Milestone**: Task success gates met, task tests pass
+   - **Milestone → dev**: All milestone tasks complete, all milestone tests pass, no regressions
+   - **dev → main**: ALL tests pass (regression, unit, integration, performance), ready for release
+
+6. **Conventional Commits**: Follow organization's conventional commit format to enable automated semantic versioning
+
+**Example Workflow**:
+
+```bash
+# Start milestone work
+git checkout dev
+git checkout -b milestone/1.1-core-functionality
+
+# Start task work
+git checkout -b task/1.1.1-implement-parser
+
+# Work on task with conventional commits
+git commit -m "feat(parser): add basic parsing logic"
+git commit -m "test(parser): add parser validation tests"
+
+# Complete task - merge to milestone
+git checkout milestone/1.1-core-functionality
+git merge task/1.1.1-implement-parser
+git branch -d task/1.1.1-implement-parser
+
+# Complete all milestone tasks, merge to dev
+git checkout dev
+git merge milestone/1.1-core-functionality
+git branch -d milestone/1.1-core-functionality
+
+# When ready for release, merge to main
+git checkout main
+git merge dev
+git tag v1.1.0
+```
+
+**Benefits**:
+- Clear organization of complex multi-phase projects
+- Easy tracking of milestone progress
+- Facilitates parallel development on different milestones
+- Git history reflects roadmap structure
+- Enables automated changelog generation per milestone
+
+**Cross-References**:
+- See `roadmap-generation.instructions.md` for milestone/task structure
+- See `testing.instructions.md` for test requirements at each merge level
+
 ### Merge Strategy
 
 **Merge Commit Messages**:
