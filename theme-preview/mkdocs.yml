@@ -1,0 +1,51 @@
+site_name: CrackingShells Theme Preview
+site_description: Brand theme preview for CrackingShells documentation sites
+docs_dir: docs
+
+theme:
+  name: material
+  custom_dir: overrides
+  logo: resources/images/cs_wide_light_bg.png
+  favicon: resources/images/cs_core_dark_bg.png
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: egg-shell
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - content.code.copy
+    - navigation.tabs
+    - navigation.top
+    - toc.follow
+
+extra_css:
+  - stylesheets/brand.css
+
+plugins:
+  - search
+  - print-site
+
+markdown_extensions:
+  - admonition
+  - tables
+  - attr_list
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Configuration: configuration.md
+  - API Reference: api-reference.md
